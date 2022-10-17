@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <h2>Primeira parte</h2>
+    <p>Para atribuir um <span th:text="${atributo}">unknown</span>, usarei expression language com Thymeleaf</p>
+    <p>
+        <ul>
+        <li> gerar o projeto usamos o Spring Initialzr: https://start.spring.io/</li>
+        <li>Usamos o Spring Boot para inicializar a aplicação e rodar o Tomcat</li>
+        <li>Spring Boot já tem o servlet container Tomcat embutido</li>
+        <li>Spring MVC segue o padrão arquitetural Model-View-Controller</li>
+        <li>O servlet do Spring MVC recebe as requisições e delega para controllers mais específicos</li>
+        <li>Como View, o Spring MVC usa Thymeleaf</li>
+        <li>O Thymeleaf é uma alternativa a tecnologia JSP, serve para gerar HTML dinamicamente</li>
+        <li>Thymeleaf tem a vantagem de usar atributos para definir a expression language</li>
+        <li>Para definir uma classe que responde uma requisição HTTP, usamos as anotações:
+            @Controller, @GetMapping entre outras opções</li>
+            <li>Métodos que atendem requisições HTTP são chamados de action</li>
+        </ul>
+    </p>
+</body>
+</html>
