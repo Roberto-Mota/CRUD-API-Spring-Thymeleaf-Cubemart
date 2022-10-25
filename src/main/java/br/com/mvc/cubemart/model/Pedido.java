@@ -13,7 +13,7 @@ public class Pedido {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    String NomeProduto;
+    private String NomeProduto;
     private BigDecimal valorNegociado;
     private LocalDate dataDaEntrega;
     private String urlProduto;

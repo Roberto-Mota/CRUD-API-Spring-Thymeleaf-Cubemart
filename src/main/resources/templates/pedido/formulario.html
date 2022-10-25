@@ -1,35 +1,66 @@
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">    </head>
-    <body>
-        <div class="container">
-            <div class="jumbotron mb-0">
-                <h1 class="display-4">Novo Pedido</h1>
-            </div>
 
-            <form action="/pedido/novo" method="POST"> <!-- O action é um redirecionamento que já bate no endpoint com o corpo preenchido conforme o formulário -->
-                <div>
-                    <label for="nomeProduto">Produto</label>
-                    <input name="nomeProduto" placeholder="nome do produto"/>
-                    <small>Informa qual o nome do produto.</small>
-                </div>
-                <div>
-                    <label for="urlProduto">Url</label>
-                    <input name="urlProduto" placeholder="url do produto"/>
-                    <small>Procure em um site o produto que você deseja e cole a url da página aqui.</small>
-                </div>
-                <div>
-                    <label for="urlImagem">Imagem</label>
-                    <input name="urlImagem" placeholder="url da imagem"/>
-                    <small>Copie a url de uma boa imagem do produto e cole aqui para ajudar a conseguir compradores.</small>
-                </div>
-                <div>
-                    <label for="descricao">Descrição</label>
-                    <textarea name="descricao" placeholder="Adicione detalhes importantes para ajudar o comprador."></textarea>
-                </div>
-                <button type="submit">Cadastrar</button>
-            </form>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron mb-0">
+            <h1 class="display-4">Novo Pedido</h1>
         </div>
-    </body>
+
+        <div class="card mt-3">
+            <form th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST">
+                <!--1a-->
+                <!--2a-->
+                <div class="form-group">
+                    <label for="nomeProduto">Produto</label>
+                    <input th:field="*{nomeProduto}" th:errorClass="is-invalid" class="form-control" name="nomeProduto"
+                        placeholder="nome do produto" />
+                    <small>Informa qual o nome do produto.</small>
+                    <div class="invalid-feedback" th:errors="*{nomeProduto}" <!--4a-->
+                        Erros do nome do produto
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="urlProduto">Url</label>
+                    <input th:field="*{urlProduto}" th:errorclass="is-invalid" <!--4b--> class="form-control"
+                    name="urlProduto" placeholder="url do produto"/>
+                    <small>Procure em um site o produto que você deseja e cole a url da página aqui.</small>
+                    <div class="invalid-feedback" th:errors="*{urlProduto}" <!--4a-->
+                        Erros da Url do produto
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="urlImagem">Imagem</label>
+                    <input th:field="*{urlImagem}" th:errorClass="is-invalid" class="form-control" <!--name="urlImagem"
+                        --> placeholder="url da imagem"/>
+                    <small>Copie a url de uma boa imagem do produto e cole aqui para ajudar a conseguir
+                        compradores.</small>
+                    <div class="invalid-feedback" th:errors="*{urlImagem}" <!--4a-->
+                        Erros da Url da imagem
+                    </div>
+
+                </div>
+        <div class="form-group">
+            <label for="descricao">Descrição</label>
+            <textarea th:field="*{descricao}" class="form-control"
+                placeholder="Adicione detalhes importantes para ajudar o comprador."></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+        </form>
+    </div>
+    </div>
+</body>
+
 </html>
+
+<!-- 1a: O action é um redirecionamento que já bate no endpoint com o corpo preenchido conforme o formulário -->
+<!-- 2a: Com o Thymeleaf, associar o formulário a um objeto, no caso requisicaoNovoPedido (tem que ser minusculo -?-), com "${}" para acessar um atributo do request -->
+<!-- 3a: Associar a um campo/field do objeto com "*{}" para acessar um atributo do objeto selecionado em "${}". Ao fazer isso, o thymeleaf gerencia o name, id e value do atributo alí no HTML, sendo redundante popular esses campos -?-
+            isso faz com que o atributo mantenha-se populado quando, por exemplo, der um return pra pagina sem salvar o produto, pois faltou algum campo ser preenchido-->
+<!-- 4a: Com a validação estabelecida, o th:errors consegue acessar cada erro que deu, daí acho que a div "Só aparece se der o erro" -?- -->
+<!-- 4b: th:errorsclass faz com que a tag receba aquela classe (u.e. class="" do html) caso ocorra um erro -?--->
