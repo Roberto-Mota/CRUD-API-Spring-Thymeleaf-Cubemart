@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.mvc.cubemart.dto.RequisicaoNovoPedido;
 import br.com.mvc.cubemart.model.Pedido;
+import br.com.mvc.cubemart.model.StatusPedido;
 import br.com.mvc.cubemart.repository.PedidoRepository;
 
 @Controller
@@ -45,6 +46,7 @@ modelAndView.addObject("tarefa", tarefa);
         }
 
         Pedido pedido = requisicao.toPedido(); //syntax convenção, similar ao mapperObject
+        pedido.setStatus(StatusPedido.AGUARDANDO);
         pedidoRepository.save(pedido);
 
         /*
@@ -56,6 +58,6 @@ modelAndView.addObject("tarefa", tarefa);
          * 
          * Já o bindingResult é o resultado da validação anterior
          */
-        return "pedido/formulario";
+        return "redirect:/home";
     }
 }
